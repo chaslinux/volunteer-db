@@ -37,7 +37,7 @@ if (isset($_POST['first_name'])) {
     $password = 'your_password';
 
     try {
-        $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+        $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4",$username,$password);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Insert data into the volunteers table
@@ -77,6 +77,8 @@ if (isset($_POST['first_name'])) {
         ]);
 
         // Redirect to confirmation page or dashboard
+        $_SESSION['first_name'] = $first_name;
+        $_SESSION['last_name'] = $last_name;
         header('Location: confirmation.php');
         exit();
     } catch (PDOException $e) {
