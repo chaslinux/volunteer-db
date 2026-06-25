@@ -228,3 +228,78 @@ tr:hover
 {
     background: #f5f5f5;
 }
+
+.details-card
+{
+    background: white;
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+}
+
+.details-grid
+{
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 12px 20px;
+}
+
+.details-label
+{
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+.details-value
+{
+    word-break: break-word;
+}
+
+.print-actions
+{
+    margin-bottom: 25px;
+    display: flex;
+    gap: 15px;
+}
+
+.badge
+{
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: #e8f5e9;
+    color: #2e7d32;
+    font-weight: bold;
+}
+
+.section-divider
+{
+    margin: 25px 0;
+    border-top: 2px solid #e8f5e9;
+    padding-top: 20px;
+}
+
+@media print
+{
+    body
+    {
+        background: white;
+    }
+
+    .print-actions
+    {
+        display: none;
+    }
+
+    .details-card
+    {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+
+    .btn
+    {
+        display: none;
+    }
+}
