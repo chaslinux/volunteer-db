@@ -53,6 +53,7 @@ input[type="text"],
 input[type="email"],
 input[type="tel"],
 input[type="date"],
+input[type="password"],
 select,
 textarea {
     width: 100%;
@@ -61,6 +62,8 @@ textarea {
     border: 1px solid #ccc;
     border-radius: 10px;
     font-size: 15px;
+    display: block;
+    box-sizing: border-box;
 }
 
 textarea {
