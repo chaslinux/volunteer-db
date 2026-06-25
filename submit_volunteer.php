@@ -41,14 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     $languages_spoken = isset($_POST['languages_spoken']) ? $_POST['languages_spoken'] : null;
 
     // Database connection
-    $host = 'localhost';
-    $dbname = 'your_database_name';
-    $username = 'your_username';
-    $password = 'your_password';
-
-    try {
-        $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4",$username,$password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    require 'db_connect.php';
 
         // Insert data into the volunteers table
         $sql = "INSERT INTO volunteers (first_name, last_name, date_applied, street_address, city, province, postal_code, contact_phone, email_address, tuesday_9am_12pm, tuesday_1pm_4pm, wednesday_9am_12pm, wednesday_1pm_4pm, thursday_9am_12pm, thursday_1pm_4pm, monday_9am_12pm, monday_1pm_4pm, saturday_9am_12pm, saturday_1pm_4pm, physical_considerations, physical_explanation, emergency_contact_name, emergency_relationship, emergency_phone, hobbies_skills_interests, special_training_certification, prompted_by, languages_spoken) 
