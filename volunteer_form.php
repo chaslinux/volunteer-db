@@ -143,7 +143,8 @@ $isAdmin = isset($_SESSION['admin']);
         <label>
             <input type="radio"
                    name="physical_considerations"
-                   value="Yes">
+                   value="Yes"
+                   required>
             Yes
         </label>
 
