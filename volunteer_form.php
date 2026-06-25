@@ -25,7 +25,6 @@ $isAdmin = isset($_SESSION['admin']);
 
 <div class="container">
 
-```
 <div class="form-header">
     <h1>🌱 Volunteer Application</h1>
     <p>
