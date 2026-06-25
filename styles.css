@@ -66,6 +66,14 @@ textarea {
     box-sizing: border-box;
 }
 
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #4caf50;
+    box-shadow: 0 0 0 3px rgba(76,175,80,0.15);
+}
+
 textarea {
     min-height: 120px;
     resize: vertical;

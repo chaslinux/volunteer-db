@@ -2,14 +2,9 @@
 
 session_start();
 
-if (
-    !isset($_SESSION['admin_logged_in'])
-)
+if (!isset($_SESSION['admin_logged_in']))
 {
-    header(
-        "Location: admin_login.php"
-    );
-
+    header("Location: admin_login.php");
     exit;
 }
 
@@ -21,18 +16,20 @@ $stmt = $pdo->query("
     ORDER BY id DESC
 ");
 
-$volunteers =
-    $stmt->fetchAll(PDO::FETCH_ASSOC);
+$volunteers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Volunteer Dashboard</title>
 
-<link rel="stylesheet"
-      href="styles.css">
+<link rel="stylesheet" href="styles.css">
 
 </head>
 
@@ -40,78 +37,84 @@ $volunteers =
 
 <div class="container">
 
-    <h1>
-        Volunteer Applications
-    </h1>
+    <div class="form-header">
+        <h1>🌱 Volunteer Dashboard</h1>
+        <p>Manage volunteer applications</p>
+    </div>
 
-    <p>
+    <div style="display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap;">
 
-        <a href="admin_logout.php">
+        <a class="btn" href="admin_logout.php">
             Logout
         </a>
 
-    </p>
+        <button class="btn" onclick="window.print()">
+            Print List
+        </button>
 
-    <table>
+    </div>
 
-        <thead>
+    <div class="card-section">
 
-        <tr>
+        <h2>
+            Applications (<?= count($volunteers) ?>)
+        </h2>
 
-            <th>ID</th>
-            <th>Name</th>
-            <th>Date Applied</th>
-            <th>Email</th>
-            <th>Phone</th>
+        <table>
 
-        </tr>
+            <thead>
 
-        </thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Action</th>
+                </tr>
 
-        <tbody>
+            </thead>
 
-        <?php foreach($volunteers as $v): ?>
+            <tbody>
 
-        <tr>
+                <?php foreach ($volunteers as $v): ?>
 
-            <td>
-                <?= $v['id'] ?>
-            </td>
+                    <tr>
 
-            <td>
-            <a href="volunteer_details.php?id=<?= $v['id'] ?>">
-            <?= htmlspecialchars(
-                $v['first_name']
-                . ' '
-                . $v['last_name']
-            ) ?>
-            </a>
+                        <td><?= $v['id'] ?></td>
 
-            </td>
+                        <td>
+                            <?= htmlspecialchars($v['first_name'] . ' ' . $v['last_name']) ?>
+                        </td>
 
-            <td>
-                <?= $v['date_applied'] ?>
-            </td>
+                        <td>
+                            <?= htmlspecialchars($v['date_applied']) ?>
+                        </td>
 
-            <td>
-                <?= htmlspecialchars(
-                    $v['email_address']
-                ) ?>
-            </td>
+                        <td>
+                            <?= htmlspecialchars($v['email_address']) ?>
+                        </td>
 
-            <td>
-                <?= htmlspecialchars(
-                    $v['contact_phone']
-                ) ?>
-            </td>
+                        <td>
+                            <?= htmlspecialchars($v['contact_phone']) ?>
+                        </td>
 
-        </tr>
+                        <td>
+                            <a class="btn"
+                               href="volunteer_details.php?id=<?= $v['id'] ?>">
+                                View
+                            </a>
+                        </td>
 
-        <?php endforeach; ?>
+                    </tr>
 
-        </tbody>
+                <?php endforeach; ?>
 
-    </table>
+            </tbody>
+
+        </table>
+
+    </div>
 
 </div>
 
