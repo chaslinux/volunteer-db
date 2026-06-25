@@ -224,7 +224,6 @@ $isAdmin = isset($_SESSION['admin']);
     </button>
 
 </form>
-```
 
 </div>
 
