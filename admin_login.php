@@ -5,7 +5,7 @@ require 'db_connect.php';
 
 $error = '';
 
-if($_SERVER['REQUEST_METHOD'] === 'POST')
+if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
     $username = trim($_POST['username']);
     $password = $_POST['password'];
@@ -20,12 +20,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 
     $admin = $stmt->fetch();
 
-    if(
+    if (
         $admin &&
-        password_verify(
-            $password,
-            $admin['password_hash']
-        )
+        password_verify($password, $admin['password_hash'])
     )
     {
         $_SESSION['admin_logged_in'] = true;
@@ -38,25 +35,85 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 
     $error = "Invalid username or password.";
 }
+
 ?>
-<form method="post">
 
-    <h2>Administrator Login</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
-    <?php if($error): ?>
-        <div class="error">
-            <?= htmlspecialchars($error) ?>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Administrator Login</title>
+
+<link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+<div class="hero-container">
+
+    <div class="hero-card">
+
+        <div class="form-header">
+
+            <h1>🌱 Administrator Login</h1>
+
+            <p>
+                Volunteer Management System
+            </p>
+
         </div>
-    <?php endif; ?>
 
-    <label>Username</label>
-    <input type="text" name="username" required>
+        <?php if ($error): ?>
 
-    <label>Password</label>
-    <input type="password" name="password" required>
+            <div class="card-section">
 
-    <button type="submit">
-        Login
-    </button>
+                <p style="color:#c62828; font-weight:bold; text-align:center;">
+                    <?= htmlspecialchars($error) ?>
+                </p>
 
-</form>
+            </div>
+
+        <?php endif; ?>
+
+        <form method="post">
+
+            <div class="card-section">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    required>
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    required>
+
+                <button type="submit">
+                    Login
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>
