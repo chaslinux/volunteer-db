@@ -1,12 +1,3 @@
-<?php
-session_start();
-if (isset($_SESSION['admin'])) {
-    $isAdmin = true;
-} else {
-    $isAdmin = false;
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -89,38 +80,55 @@ $isAdmin = isset($_SESSION['admin']);
     <div class="card-section">
         <h2>Availability</h2>
 
-        <div class="checkbox-grid">
+        <div class="availability-grid">
 
-            <label>
-                <input type="checkbox" name="tuesday_9am_12pm">
-                Tuesday 9:30am – 12:00pm
-            </label>
+             <div class="day-card">
 
-            <label>
-                <input type="checkbox" name="tuesday_1pm_4pm">
-                Tuesday 1:00pm – 4:00pm
-            </label>
+                <h3>Tuesday</h3>
 
-            <label>
-                <input type="checkbox" name="wednesday_9am_12pm">
-                Wednesday 9:30am – 12:00pm
-            </label>
+                <label>
+                    <input type="checkbox" name="tuesday_9am_12pm">
+                    9:30am – 12:00pm
+                </label>
 
-            <label>
-                <input type="checkbox" name="wednesday_1pm_4pm">
-                Wednesday 1:00pm – 4:00pm
-            </label>
+                <label>
+                    <input type="checkbox" name="tuesday_1pm_4pm">
+                    1:00pm – 4:00pm
+                </label>
 
-            <label>
-                <input type="checkbox" name="thursday_9am_12pm">
-                Thursday 9:30am – 12:00pm
-            </label>
+            </div>
 
-            <label>
-                <input type="checkbox" name="thursday_1pm_4pm">
-                Thursday 1:00pm – 4:00pm
-            </label>
+            <div class="day-card">
 
+                <h3>Wednesday</h3>
+
+                <label>
+                    <input type="checkbox" name="wednesday_9am_12pm">
+                    9:30am – 12:00pm
+                </label>
+
+                <label>
+                    <input type="checkbox" name="wednesday_1pm_4pm">
+                    1:00pm – 4:00pm
+                </label>
+
+            </div>
+
+            <div class="day-card">
+
+                <h3>Thursday</h3>
+
+                <label>
+                    <input type="checkbox" name="thursday_9am_12pm">
+                    9:30am – 12:00pm
+                </label>
+
+                <label>
+                    <input type="checkbox" name="thursday_1pm_4pm">
+                    1:00pm – 4:00pm
+                </label>
+
+            </div>
         </div>
 
         <p style="margin-top:20px;color:#666;">

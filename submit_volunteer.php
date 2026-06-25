@@ -1,8 +1,18 @@
 <?php
 session_start();
-if (isset($_POST['first_name'])) {
-    $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST')
+{
+    if (
+        empty($_POST['first_name']) ||
+        empty($_POST['last_name'])
+    )
+    {
+        die("Required fields missing.");
+    }
+
+    $first_name = trim($_POST['first_name']);
+    $last_name = trim($_POST['last_name']);
     $date_applied = $_POST['date_applied'];
     $street_address = isset($_POST['street_address']) ? $_POST['street_address'] : null;
     $city = isset($_POST['city']) ? $_POST['city'] : null;
