@@ -10,67 +10,219 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST')
     die('Invalid request.');
 }
 
-if (
-    empty($_POST['first_name']) ||
-    empty($_POST['last_name']) ||
-    empty($_POST['date_applied'])
-)
+/*
+|--------------------------------------------------------------------------
+| Validation Functions
+|--------------------------------------------------------------------------
+*/
+
+function clean(?string $value): string
 {
-    die('Required fields missing.');
+    return trim($value ?? '');
 }
 
-$first_name = trim($_POST['first_name']);
-$last_name = trim($_POST['last_name']);
-$date_applied = $_POST['date_applied'];
+function sanitizeText(?string $value): string
+{
+    $value = clean($value);
 
-$street_address = $_POST['street_address'] ?? null;
-$city = $_POST['city'] ?? null;
-$province = $_POST['province'] ?? null;
-$postal_code = $_POST['postal_code'] ?? null;
-$contact_phone = $_POST['contact_phone'] ?? null;
-$email_address = $_POST['email_address'] ?? null;
+    // Remove control characters
+    return preg_replace('/[\x00-\x1F\x7F]/u', '', $value);
+}
 
-$tuesday_9am_12pm = isset($_POST['tuesday_9am_12pm']) ? 1 : 0;
-$tuesday_1pm_4pm = isset($_POST['tuesday_1pm_4pm']) ? 1 : 0;
+function validateName(string $value): bool
+{
+    return preg_match("/^[A-Za-zÀ-ÿ' -]{1,50}$/u", $value) === 1;
+}
 
-$wednesday_9am_12pm = isset($_POST['wednesday_9am_12pm']) ? 1 : 0;
-$wednesday_1pm_4pm = isset($_POST['wednesday_1pm_4pm']) ? 1 : 0;
+function validatePhone(string $value): bool
+{
+    if ($value === '')
+    {
+        return true;
+    }
 
-$thursday_9am_12pm = isset($_POST['thursday_9am_12pm']) ? 1 : 0;
-$thursday_1pm_4pm = isset($_POST['thursday_1pm_4pm']) ? 1 : 0;
+    return preg_match('/^[0-9()+ -]{10,20}$/', $value) === 1;
+}
 
-$monday_9am_12pm = isset($_POST['monday_9am_12pm']) ? 1 : 0;
-$monday_1pm_4pm = isset($_POST['monday_1pm_4pm']) ? 1 : 0;
+function validatePostalCode(string $value): bool
+{
+    if ($value === '')
+    {
+        return true;
+    }
 
-$saturday_9am_12pm = isset($_POST['saturday_9am_12pm']) ? 1 : 0;
-$saturday_1pm_4pm = isset($_POST['saturday_1pm_4pm']) ? 1 : 0;
+    return preg_match('/^[A-Za-z]\d[A-Za-z][ ]?\d[A-Za-z]\d$/', $value) === 1;
+}
+
+function validateEmail(string $value): bool
+{
+    if ($value === '')
+    {
+        return true;
+    }
+
+    return filter_var($value, FILTER_VALIDATE_EMAIL) !== false;
+}
+
+function validateDate(string $value): bool
+{
+    $date = DateTime::createFromFormat('Y-m-d', $value);
+
+    return $date &&
+           $date->format('Y-m-d') === $value;
+}
+
+function validateLength(string $value, int $max): bool
+{
+    return mb_strlen($value) <= $max;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Required Fields
+|--------------------------------------------------------------------------
+*/
+
+$first_name   = sanitizeText($_POST['first_name'] ?? '');
+$last_name    = sanitizeText($_POST['last_name'] ?? '');
+$date_applied = clean($_POST['date_applied'] ?? '');
+
+if (
+    $first_name === '' ||
+    $last_name === '' ||
+    $date_applied === ''
+)
+{
+    die('Please complete all required fields.');
+}
+
+/*
+|--------------------------------------------------------------------------
+| Validate Required Fields
+|--------------------------------------------------------------------------
+*/
+
+if (!validateName($first_name))
+{
+    die('Invalid first name.');
+}
+
+if (!validateName($last_name))
+{
+    die('Invalid last name.');
+}
+
+if (!validateDate($date_applied))
+{
+    die('Invalid application date.');
+}
+
+/*
+|--------------------------------------------------------------------------
+| Optional Fields
+|--------------------------------------------------------------------------
+*/
+
+$street_address = sanitizeText($_POST['street_address'] ?? '');
+$city           = sanitizeText($_POST['city'] ?? '');
+$province       = sanitizeText($_POST['province'] ?? '');
+$postal_code    = strtoupper(sanitizeText($_POST['postal_code'] ?? ''));
+$contact_phone  = sanitizeText($_POST['contact_phone'] ?? '');
+$email_address  = sanitizeText($_POST['email_address'] ?? '');
 
 $physical_considerations =
-    $_POST['physical_considerations'] ?? null;
+    sanitizeText($_POST['physical_considerations'] ?? '');
 
 $physical_explanation =
-    $_POST['physical_explanation_text'] ?? null;
+    sanitizeText($_POST['physical_explanation_text'] ?? '');
 
 $emergency_contact_name =
-    $_POST['emergency_contact_name'] ?? null;
+    sanitizeText($_POST['emergency_contact_name'] ?? '');
 
 $emergency_relationship =
-    $_POST['emergency_relationship'] ?? null;
+    sanitizeText($_POST['emergency_relationship'] ?? '');
 
 $emergency_phone =
-    $_POST['emergency_phone'] ?? null;
+    sanitizeText($_POST['emergency_phone'] ?? '');
 
 $hobbies_skills_interests =
-    $_POST['hobbies_skills_interests'] ?? null;
+    sanitizeText($_POST['hobbies_skills_interests'] ?? '');
 
 $special_training_certification =
-    $_POST['special_training_certification'] ?? null;
+    sanitizeText($_POST['special_training_certification'] ?? '');
 
 $prompted_by =
-    $_POST['prompted_by'] ?? null;
+    sanitizeText($_POST['prompted_by'] ?? '');
 
 $languages_spoken =
-    $_POST['languages_spoken'] ?? null;
+    sanitizeText($_POST['languages_spoken'] ?? '');
+
+/*
+|--------------------------------------------------------------------------
+| Availability Checkboxes
+|--------------------------------------------------------------------------
+*/
+
+$tuesday_9am_12pm   = isset($_POST['tuesday_9am_12pm']) ? 1 : 0;
+$tuesday_1pm_4pm    = isset($_POST['tuesday_1pm_4pm']) ? 1 : 0;
+
+$wednesday_9am_12pm = isset($_POST['wednesday_9am_12pm']) ? 1 : 0;
+$wednesday_1pm_4pm  = isset($_POST['wednesday_1pm_4pm']) ? 1 : 0;
+
+$thursday_9am_12pm  = isset($_POST['thursday_9am_12pm']) ? 1 : 0;
+$thursday_1pm_4pm   = isset($_POST['thursday_1pm_4pm']) ? 1 : 0;
+
+$monday_9am_12pm    = isset($_POST['monday_9am_12pm']) ? 1 : 0;
+$monday_1pm_4pm     = isset($_POST['monday_1pm_4pm']) ? 1 : 0;
+
+$saturday_9am_12pm  = isset($_POST['saturday_9am_12pm']) ? 1 : 0;
+$saturday_1pm_4pm   = isset($_POST['saturday_1pm_4pm']) ? 1 : 0;
+
+/*
+|--------------------------------------------------------------------------
+| Validate Optional Fields
+|--------------------------------------------------------------------------
+*/
+
+if (!validatePhone($contact_phone))
+{
+    die('Invalid contact phone number.');
+}
+
+if (!validatePhone($emergency_phone))
+{
+    die('Invalid emergency contact phone number.');
+}
+
+if (!validatePostalCode($postal_code))
+{
+    die('Invalid postal code.');
+}
+
+if (!validateEmail($email_address))
+{
+    die('Invalid email address.');
+}
+
+if (!validateLength($street_address, 100))
+{
+    die('Street address is too long.');
+}
+
+if (!validateLength($city, 60))
+{
+    die('City is too long.');
+}
+
+if (!validateLength($province, 30))
+{
+    die('Province is too long.');
+}
+
+if (!validateLength($hobbies_skills_interests, 5000))
+{
+    die('Skills and interests are too long.');
+}
 
 require 'db_connect.php';
 

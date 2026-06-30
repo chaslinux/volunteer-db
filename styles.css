@@ -314,3 +314,71 @@ tr:hover
         display: none;
     }
 }
+
+/* =====================================================
+   Required Fields
+===================================================== */
+
+label.required::after
+{
+    content: " *";
+    color: #d32f2f;
+    font-weight: bold;
+}
+
+/* =====================================================
+   Form Validation
+===================================================== */
+
+input:required:valid,
+textarea:required:valid,
+select:required:valid
+{
+    border-color: #4caf50;
+}
+
+input:invalid,
+textarea:invalid,
+select:invalid
+{
+    border-color: #d32f2f;
+}
+
+input:focus:invalid,
+textarea:focus:invalid,
+select:focus:invalid
+{
+    box-shadow: 0 0 0 3px rgba(211,47,47,.15);
+}
+
+/* Don't show invalid styling before the user types */
+
+input:placeholder-shown
+{
+    border-color: #ccc;
+}
+
+textarea:placeholder-shown
+{
+    border-color: #ccc;
+}
+
+/* =====================================================
+   Optional Helper Text
+===================================================== */
+
+.field-help
+{
+    display: block;
+    margin-top: 4px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.field-error
+{
+    display: block;
+    margin-top: 4px;
+    color: #d32f2f;
+    font-size: 0.85rem;
+}
