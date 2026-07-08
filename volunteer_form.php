@@ -45,6 +45,7 @@ $isAdmin = isset($_SESSION['admin']);
                 autocomplete="given-name"
                 autocapitalize="words"
                 pattern="[A-Za-zÀ-ÿ' -]+"
+                placeholder="Joe Smith"
                 title="Letters, spaces, apostrophes and hyphens only">
 
             <label for="last_name" class="required">
@@ -106,12 +107,11 @@ $isAdmin = isset($_SESSION['admin']);
             <select
                 id="province"
                 name="province"
+                required
                 autocomplete="address-level1">
-
                 <option value="">Select Province</option>
                 <option value="Ontario">Ontario</option>
                 <option value="Just Visiting">Just Visiting</option>
-
             </select>
 
             <label for="postal_code">
@@ -138,9 +138,9 @@ $isAdmin = isset($_SESSION['admin']);
                 name="contact_phone"
                 maxlength="20"
                 autocomplete="tel"
-                pattern="[0-9()+ -]{10,20}"
-                title="Enter a valid phone number">
-
+                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                placeholder="123-456-7890"
+                title="Please match the requested format: ###-###-####"
             <label for="email_address">
                 Email Address
             </label>
