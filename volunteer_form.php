@@ -137,7 +137,7 @@ $isAdmin = isset($_SESSION['admin']);
                 autocomplete="tel"
                 pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                 placeholder="123-456-7890"
-                title="Please match the requested format: ###-###-####">
+                title="Please match the requested format: 123-456-7890">
 
             <label for="email_address">
                 Email Address
