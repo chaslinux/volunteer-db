@@ -15,6 +15,7 @@ sudo systemctl status mysql
 sudo systemctl enable mysql
 
 sudo apt -y install php libapache2-mod-php php-mysql
+sudo apt -y install php-mbstring
 sudo systemctl restart apache2
 
 sudo apt -y install git

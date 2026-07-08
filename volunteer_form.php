@@ -14,9 +14,7 @@ $isAdmin = isset($_SESSION['admin']);
 </head>
 
 <body>
-
 <div class="container">
-
     <div class="form-header">
         <h1>🌱 Volunteer Application</h1>
         <p>
@@ -26,12 +24,10 @@ $isAdmin = isset($_SESSION['admin']);
     </div>
 
     <form action="submit_volunteer.php" method="post">
-
         <!-- Contact Information -->
         <div class="card-section">
 
             <h2>Contact Information</h2>
-
             <label for="first_name" class="required">
                 First Name(s)
             </label>
@@ -45,7 +41,7 @@ $isAdmin = isset($_SESSION['admin']);
                 autocomplete="given-name"
                 autocapitalize="words"
                 pattern="[A-Za-zÀ-ÿ' -]+"
-                placeholder="Joe Smith"
+                placeholder="Joe"
                 title="Letters, spaces, apostrophes and hyphens only">
 
             <label for="last_name" class="required">
@@ -61,6 +57,7 @@ $isAdmin = isset($_SESSION['admin']);
                 autocomplete="family-name"
                 autocapitalize="words"
                 pattern="[A-Za-zÀ-ÿ' -]+"
+                placeholder="Smith"
                 title="Letters, spaces, apostrophes and hyphens only">
 
             <label for="date_applied" class="required">
@@ -140,7 +137,8 @@ $isAdmin = isset($_SESSION['admin']);
                 autocomplete="tel"
                 pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                 placeholder="123-456-7890"
-                title="Please match the requested format: ###-###-####"
+                title="Please match the requested format: ###-###-####">
+
             <label for="email_address">
                 Email Address
             </label>
@@ -150,21 +148,17 @@ $isAdmin = isset($_SESSION['admin']);
                 id="email_address"
                 name="email_address"
                 maxlength="100"
-                autocomplete="email">
-
+                autocomplete="email"
+                placeholder="username@domain.com"
+                title="Please match the requested format: your@emailaddress.com">
         </div>
 
         <!-- Availability -->
         <div class="card-section">
-
             <h2>Availability</h2>
-
             <div class="availability-grid">
-
                 <div class="day-card">
-
                     <h3>Tuesday</h3>
-
                     <label>
                         <input type="checkbox" name="tuesday_9am_12pm">
                         9:30am – 12:00pm
@@ -174,13 +168,10 @@ $isAdmin = isset($_SESSION['admin']);
                         <input type="checkbox" name="tuesday_1pm_4pm">
                         1:00pm – 4:00pm
                     </label>
-
                 </div>
 
                 <div class="day-card">
-
                     <h3>Wednesday</h3>
-
                     <label>
                         <input type="checkbox" name="wednesday_9am_12pm">
                         9:30am – 12:00pm
@@ -190,13 +181,10 @@ $isAdmin = isset($_SESSION['admin']);
                         <input type="checkbox" name="wednesday_1pm_4pm">
                         1:00pm – 4:00pm
                     </label>
-
                 </div>
 
                 <div class="day-card">
-
                     <h3>Thursday</h3>
-
                     <label>
                         <input type="checkbox" name="thursday_9am_12pm">
                         9:30am – 12:00pm
@@ -206,9 +194,7 @@ $isAdmin = isset($_SESSION['admin']);
                         <input type="checkbox" name="thursday_1pm_4pm">
                         1:00pm – 4:00pm
                     </label>
-
                 </div>
-
             </div>
 
             <p style="margin-top:20px;color:#666;">
@@ -221,7 +207,6 @@ $isAdmin = isset($_SESSION['admin']);
         <div class="card-section">
 
             <h2>Physical Considerations</h2>
-
             <label>
                 <input
                     type="radio"
@@ -250,22 +235,15 @@ $isAdmin = isset($_SESSION['admin']);
                     id="physical_explanation_text"
                     name="physical_explanation_text"
                     maxlength="2000"></textarea>
-
             </div>
-
         </div>
-
 
         <!-- Emergency Information -->
         <div class="card-section">
-
             <h2>Emergency Information</h2>
-
-
             <label
                 for="emergency_contact_name"
                 class="required">
-
                 Emergency Contact Name
 
             </label>
@@ -278,15 +256,13 @@ $isAdmin = isset($_SESSION['admin']);
                 maxlength="50"
                 autocapitalize="words"
                 pattern="[A-Za-zÀ-ÿ' -]+"
+                placeholder="Firstname Lastname"
                 title="Letters, spaces, apostrophes and hyphens only">
-
 
             <label
                 for="emergency_relationship"
                 class="required">
-
                 Relationship to You
-
             </label>
 
             <input
@@ -294,15 +270,13 @@ $isAdmin = isset($_SESSION['admin']);
                 id="emergency_relationship"
                 name="emergency_relationship"
                 required
-                maxlength="40">
-
+                maxlength="40"
+                placeholder="Family member">
 
             <label
                 for="emergency_phone"
                 class="required">
-
                 Emergency Contact Phone
-
             </label>
 
             <input
@@ -313,22 +287,17 @@ $isAdmin = isset($_SESSION['admin']);
                 maxlength="20"
                 autocomplete="tel"
                 pattern="[0-9()+ -]{10,20}"
-                title="Enter a valid phone number">
-
+                placeholder="###-###-####"
+                title="Enter a valid phone number ###-###-####">
         </div>
 
 
 
         <!-- Skills & Interests -->
         <div class="card-section">
-
             <h2>Skills & Interests</h2>
-
-
             <label for="hobbies_skills_interests">
-
                 Hobbies, Skills & Interests
-
             </label>
 
             <textarea
@@ -336,12 +305,8 @@ $isAdmin = isset($_SESSION['admin']);
                 name="hobbies_skills_interests"
                 maxlength="2000"></textarea>
 
-
-
             <label for="special_training_certification">
-
                 Special Training / Certifications
-
             </label>
 
             <textarea
@@ -349,12 +314,8 @@ $isAdmin = isset($_SESSION['admin']);
                 name="special_training_certification"
                 maxlength="2000"></textarea>
 
-
-
             <label for="prompted_by">
-
                 Who Prompted You to Volunteer?
-
             </label>
 
             <textarea
@@ -362,35 +323,22 @@ $isAdmin = isset($_SESSION['admin']);
                 name="prompted_by"
                 maxlength="1000"></textarea>
 
-
-
             <label for="languages_spoken">
-
                 Languages Spoken
-
             </label>
 
             <textarea
                 id="languages_spoken"
                 name="languages_spoken"
                 maxlength="500"></textarea>
-
-
         </div>
 
 
-
         <button type="submit">
-
             Submit Volunteer Application
-
         </button>
-
-
     </form>
-
 </div>
-
 
 
 <script>
