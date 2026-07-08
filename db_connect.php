@@ -1,9 +1,9 @@
 <?php
 
 $host = 'localhost';
-$dbname = 'volunteer_database';
-$username = 'db_user';
-$password = 'db_password';
+$dbname = 'volunteer_registration';
+$username = 'volunteer_registration';
+$password = 'changethispassword';
 
 $pdo = new PDO(
     "mysql:host=$host;dbname=$dbname;charset=utf8mb4",

@@ -2,8 +2,8 @@
 
 require 'db_connect.php';
 
-$username = 'admin';
-$password = 'ChangeMe123!';
+$username = 'administrator';
+$password = 'ChangeThisPassword123!';
 
 $passwordHash = password_hash(
     $password,
