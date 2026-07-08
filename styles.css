@@ -353,12 +353,8 @@ select:focus:invalid
 
 /* Don't show invalid styling before the user types */
 
-input:placeholder-shown
-{
-    border-color: #ccc;
-}
-
-textarea:placeholder-shown
+input:not(:required):placeholder-shown,
+textarea:not(:required):placeholder-shown
 {
     border-color: #ccc;
 }
