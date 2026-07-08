@@ -287,8 +287,8 @@ $isAdmin = isset($_SESSION['admin']);
                 maxlength="20"
                 autocomplete="tel"
                 pattern="[0-9()+ -]{10,20}"
-                placeholder="###-###-####"
-                title="Enter a valid phone number ###-###-####">
+                placeholder="123-456-7890"
+                title="Enter a valid phone number 519-123-4567">
         </div>
 
 
